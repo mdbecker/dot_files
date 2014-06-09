@@ -1,0 +1,15 @@
+[user]
+	name = Michael Becker
+	email = michaelb@aweber.com
+
+[alias]
+    tidy = !git remote prune origin && git branch -r --merged master | egrep -v 'master$' | grep origin | sed 's%origin/%%' | xargs -I% git push origin :% && git branch --merged master | grep -v 'master$' | xargs git branch -d
+    pushc = !git branch | egrep '\\* ' | egrep -v 'master$' | awk '{print $2}' | xargs git push origin -u
+    pushcf = !git branch | egrep '\\* ' | egrep -v 'master$' | awk '{print $2}' | xargs git push origin -f
+    fresh = "!branch=`git branch | egrep '\\* ' | egrep -v 'master$' | awk '{print $2}'`; git checkout master; git pull; git branch -D $branch; git checkout $branch"
+[core]
+	excludesfile = /Users/michaelb/.mygitignore
+[merge]
+	tool = opendiff
+[push]
+	default = simple
